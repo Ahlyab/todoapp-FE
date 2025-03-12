@@ -49,10 +49,10 @@ h1 {
   border: none;
   margin-right: 10px;
 }
-.cross-title{
+.cross-title {
   text-decoration: line-through;
 }
-.cross{
+.cross {
   text-decoration: line-through;
   border: 1px solid #999999;
   background-color: #cccccc;
@@ -88,4 +88,8 @@ input {
 }
 .title {
   margin-top: 20px;
+}
+
+.loading-state {
+  margin: 20px 0 0 21rem;
 }

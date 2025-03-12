@@ -4,6 +4,7 @@ import AddTodo from "./AddTodo";
 
 const App = () => {
   const [todos, setTodos] = useState([]);
+  const [loading, setLoading] = useState(false)
   const baseUrl = "https://todo-backend-akrz.onrender.com/todos";
 
   useEffect(() => {
@@ -11,15 +12,20 @@ const App = () => {
   }, []);
 
   const fetchData = async () => {
+    setLoading(true)
     await fetch(baseUrl)
       .then((res) => res.json())
-      .then((data) => setTodos(data.allTodos))
+      .then((data) => {
+        setTodos(data.allTodos)
+        setLoading(false)
+      })
       .catch((err) => {
         console.log(err);
       });
   };
 
   const onAdd = async (name) => {
+    setLoading(true)
     await fetch(baseUrl, {
       method: "POST",
       body: JSON.stringify({
@@ -32,6 +38,8 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setTodos((todos) => [...todos, data]);
+        setLoading(false)
+
       })
       .catch((err) => {
         console.log(err);
@@ -39,6 +47,7 @@ const App = () => {
   };
 
   const onDelete = async (id) => {
+    setLoading(true)
     await fetch(baseUrl + `/${id}`, {
       method: "DELETE",
     })
@@ -51,6 +60,8 @@ const App = () => {
               return todo._id !== id;
             })
           );
+      setLoading(false)
+
         }
       })
       .catch((err) => {
@@ -59,6 +70,7 @@ const App = () => {
   };
 
   const handleEditTodos = async (editvalue, id) => {
+    setLoading(true)
     await fetch(baseUrl + `/${id}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -72,6 +84,8 @@ const App = () => {
       .then((response) => response.json())
       .then((data) => {
         setTodos((todos) => [...todos, data]);
+      setLoading(false)
+
       })
       .catch((err) => {
         console.log(err);
@@ -79,6 +93,7 @@ const App = () => {
   };
 
 const switchComplete = async (id) => {
+  
   const todo = todos.find((todo) => todo._id === id);
   if (!todo) {
     alert("Invalid ID");
@@ -86,6 +101,7 @@ const switchComplete = async (id) => {
   }
 
   try {
+    setLoading(true)
     const response = await fetch(baseUrl + `/${id}`, {
       method: "PUT",
       body: JSON.stringify({
@@ -110,6 +126,8 @@ const switchComplete = async (id) => {
         t._id === id ? { ...t, completed: updatedTodo.completed } : t
       )
     );
+    setLoading(false)
+
   } catch (error) {
     console.error("Error updating todo:", error);
   }
@@ -120,8 +138,8 @@ const switchComplete = async (id) => {
       <br />
       <AddTodo onAdd={onAdd} />
       <div className="allList">
-        {todos.map((todo) => (
-          <TodoList
+        {!loading && todos.map((todo) => (
+          <TodoList 
             id={todo._id}
             key={todo._id}
             title={todo.title}
@@ -131,6 +149,7 @@ const switchComplete = async (id) => {
             checkComplete={switchComplete}
           />
         ))}
+        {loading && <p className="loading-state">Loading...</p>}
       </div>
     </div>
   );
