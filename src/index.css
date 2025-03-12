@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+}
+
+.App {
+  margin: 8rem auto;
+  padding: 20px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  max-width: 50%;
+}
+h1 {
+  margin-bottom: 20px;
+  margin-right: 40px;
+  text-align: center;
+}
+.add-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.delete:hover,
+.edit:hover,
+.add-btn:hover {
+  cursor: pointer;
+}
+.add-btn {
+  background-color: rgba(2, 26, 56, 0.85);
+  color: white;
+  padding: 7px;
+  border: none;
+  border-radius: 5px;
+  margin-left: 20px;
+}
+.buttons {
+  margin-top: 20px;
+  margin-right: 50px;
+}
+.edit,
+.save {
+  background-color: rgba(2, 26, 56, 0.85);
+  border-radius: 5px;
+  color: white;
+  padding: 7px;
+  border: none;
+  margin-right: 10px;
+}
+.cross-title{
+  text-decoration: line-through;
+}
+.cross{
+  text-decoration: line-through;
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  padding: 7px;
+  border-radius: 5px;
+  color: #666666;
+}
+.delete {
+  margin-left: 10px;
+  background-color: rgba(255, 0, 0, 0.9);
+  border-radius: 5px;
+  color: white;
+  padding: 7px;
+  border: none;
+}
+.listItems {
+  margin-right: 50px;
+}
+.list {
+  text-align: center;
+  padding: 20px;
+}
+input {
+  padding: 10px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+.checkbox {
+  border-radius: 50%;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+}
+.title {
+  margin-top: 20px;
+}
